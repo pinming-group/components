@@ -1,0 +1,17 @@
+var g=Object.defineProperty,f=Object.defineProperties;var N=Object.getOwnPropertyDescriptors;var l=Object.getOwnPropertySymbols;var m=Object.prototype.hasOwnProperty,i=Object.prototype.propertyIsEnumerable;var p=(t,n,a)=>n in t?g(t,n,{enumerable:!0,configurable:!0,writable:!0,value:a}):t[n]=a,o=(t,n)=>{for(var a in n||(n={}))m.call(n,a)&&p(t,a,n[a]);if(l)for(var a of l(n))i.call(n,a)&&p(t,a,n[a]);return t},u=(t,n)=>f(t,N(n));var d=(t,n)=>{var a={};for(var r in t)m.call(t,r)&&n.indexOf(r)<0&&(a[r]=t[r]);if(t!=null&&l)for(var r of l(t))n.indexOf(r)<0&&i.call(t,r)&&(a[r]=t[r]);return a};import{R as s,c as e}from"./index.161a0514.js";import{Y as C}from"./index.52e84606.js";const D=()=>{const[t,n]=s.useState(!1);return s.createElement(C,{open:t,onClick:a=>{n(!a)}})},b=`import React from 'react';\r
+import { ToggleOpenButton } from '@pms/ui';\r
+\r
+const Demo = () => {\r
+  const [isOpen, setIsOpen] = React.useState(false);\r
+  return (\r
+    <ToggleOpenButton\r
+      open={isOpen}\r
+      onClick={(open) => {\r
+        setIsOpen(!open);\r
+      }}\r
+    />\r
+  );\r
+};\r
+\r
+export default Demo;\r
+`,B=void 0,y=void 0,O={code:b,title:B,desc:y},E=!0;var F=Object.freeze(Object.defineProperty({__proto__:null,demoMeta:O,isDemo:E,default:D},Symbol.toStringTag,{value:"Module"}));const h=t=>function(a){return console.warn("Component "+t+" was not imported, exported, or provided by MDXProvider as global scope"),e("div",o({},a))},S=h("Demo"),v={},M="wrapper";function c(a){var r=a,{components:t}=r,n=d(r,["components"]);return e(M,u(o(o({},v),n),{components:t,mdxType:"MDXLayout"}),e("h1",null,"ToggleOpenButton"),e("h2",null,"\u7EC4\u4EF6\u4ECB\u7ECD"),e("p",null,"\u5C55\u5F00\u5173\u95ED\u4EA4\u4E92\u6309\u94AE\u3002"),e("h2",null,"demos"),e(S,u(o({},F),{mdxType:"Demo"})),e("h2",null,"API"),e("table",null,e("thead",{parentName:"table"},e("tr",{parentName:"thead"},e("th",{parentName:"tr",align:"left"},"\u5B57\u6BB5\u540D"),e("th",{parentName:"tr",align:"left"},"\u8BF4\u660E"),e("th",{parentName:"tr",align:"left"},"\u7C7B\u578B"),e("th",{parentName:"tr",align:"center"},"\u9ED8\u8BA4\u503C"))),e("tbody",{parentName:"table"},e("tr",{parentName:"tbody"},e("td",{parentName:"tr",align:"left"},"classNames"),e("td",{parentName:"tr",align:"left"},"\u7C7B\u540D"),e("td",{parentName:"tr",align:"left"},"string"),e("td",{parentName:"tr",align:"center"},"-")),e("tr",{parentName:"tbody"},e("td",{parentName:"tr",align:"left"},"style"),e("td",{parentName:"tr",align:"left"},"CSS \u6837\u5F0F"),e("td",{parentName:"tr",align:"left"},e("inlineCode",{parentName:"td"},"React.CSSProperties")),e("td",{parentName:"tr",align:"center"},"-")),e("tr",{parentName:"tbody"},e("td",{parentName:"tr",align:"left"},"open"),e("td",{parentName:"tr",align:"left"},"\u5FC5\u586B\uFF0C\u662F\u5426\u5C55\u5F00\u72B6\u6001"),e("td",{parentName:"tr",align:"left"},e("inlineCode",{parentName:"td"},"boolean")),e("td",{parentName:"tr",align:"center"},"-")),e("tr",{parentName:"tbody"},e("td",{parentName:"tr",align:"left"},"onClick"),e("td",{parentName:"tr",align:"left"},"\u70B9\u51FB\u65F6\u7684\u4E8B\u4EF6"),e("td",{parentName:"tr",align:"left"},e("inlineCode",{parentName:"td"},"(isOpen: boolean) => void")),e("td",{parentName:"tr",align:"center"},"-")))))}c.isMDXComponent=!0;var _=Object.freeze(Object.defineProperty({__proto__:null,default:c},Symbol.toStringTag,{value:"Module"}));const T={};T.main=_;export{T as default};
