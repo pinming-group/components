@@ -1,5 +1,6 @@
 import type { ColumnType } from 'antd/lib/table';
-import type { FormInstance, FormItemProps } from 'antd/lib/form';
+import type { FormInstance } from 'antd/lib/form';
+import type { FormItemProps } from '../../FormItem';
 
 export type EditableTableAddPosition = 'top' | 'bottom';
 

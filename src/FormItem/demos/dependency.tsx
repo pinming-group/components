@@ -39,8 +39,7 @@ const Demo = () => {
               dependencies: ['province'],
               noStyle: true,
               span: null,
-              children: (form) => {
-                const depValue = form.getFieldValue(['province']);
+              children: (form, [depValue]) => {
                 return (
                   <FormItem
                     {...{

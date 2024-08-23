@@ -1,13 +1,14 @@
 import React, { useEffect, useState, type PropsWithChildren } from 'react';
 import { Form, Col } from 'antd';
 import { ColProps } from 'antd/lib/col';
-import { isFunction, isEqual } from 'lodash';
+import { isFunction, isEqual, isNil } from 'lodash';
 import { type NamePath } from 'antd/lib/form/interface';
 import { type FormItemProps as AFormItemProps } from 'antd/lib/form';
 import { isBooleanProp } from '../_util';
 
 export type SingleDepCondition<T = any> = {
-  condition: Record<string, any>[];
+  /** * 代表任意非空(!isNis)值 */
+  condition: (Record<string, any> | '*')[];
   result?: T;
 };
 
@@ -17,6 +18,7 @@ export type Deps = {
   deps: NamePath[];
   visible?: DepCondition<boolean>;
   options?: DepCondition<any[]>;
+  disabled?: DepCondition<boolean>;
 };
 
 export interface FormItemProps<Values = any>
@@ -70,7 +72,7 @@ export function FormItem<Values>(props: PropsWithChildren<FormItemProps<Values>>
     render,
     colStyle,
     colClassName,
-    disabled,
+    disabled: propsDisabled,
     remoteDataSource,
     remoteOptions,
     dataSource: propDataSource,
@@ -112,7 +114,7 @@ export function FormItem<Values>(props: PropsWithChildren<FormItemProps<Values>>
 
   if (!isBooleanProp(render, props)) return null;
 
-  const finalDisabled = isBooleanProp(disabled, props);
+  const finalDisabled = isBooleanProp(propsDisabled, props);
 
   const renderColWrapper = (ele) => {
     if (span !== null) {
@@ -126,7 +128,7 @@ export function FormItem<Values>(props: PropsWithChildren<FormItemProps<Values>>
     return ele;
   };
 
-  const renderChildren = (children) => {
+  const renderChildren = (children, childProps = {}) => {
     const { dependencies } = formItemProps;
 
     // ===== 增加dependencies值 =====
@@ -144,19 +146,22 @@ export function FormItem<Values>(props: PropsWithChildren<FormItemProps<Values>>
     return React.cloneElement(children as React.ReactElement, {
       disabled: finalDisabled,
       ...(dataSource ? { [finalOptionsPropName]: dataSource } : {}),
+      ...childProps,
     });
   };
 
-  const itemElement = (
+  const getItemElement = (childProps = {}) => (
     <Form.Item {...formItemProps} style={style}>
-      {renderChildren(children)}
+      {renderChildren(children, childProps)}
     </Form.Item>
   );
 
   if (dependency) {
-    const { visible, deps, options } = dependency as Deps;
+    const { visible, deps, options, disabled } = dependency as Deps;
 
     const { condition: visibleCondition, result: visibleResult = true } = (visible ||
+      {}) as SingleDepCondition<boolean>;
+    const { condition: disabledCondition, result: disabledResult = false } = (disabled ||
       {}) as SingleDepCondition<boolean>;
     const { condition: optionCondition, result: optionResult } = (options || {}) as SingleDepCondition<any[]>;
 
@@ -164,7 +169,12 @@ export function FormItem<Values>(props: PropsWithChildren<FormItemProps<Values>>
       <Form.Item dependencies={deps} noStyle>
         {(form) => {
           const isMatched = (condition) =>
-            condition.some((c) => deps.every((key, idx) => isEqual(form.getFieldValue(key), c[idx])));
+            condition.some((c) =>
+              deps.every((key, idx) => {
+                if (c === '*' && !isNil(form.getFieldValue(key))) return true;
+                return isEqual(form.getFieldValue(key), c[idx]);
+              })
+            );
 
           if (options) {
             // TODO: 更新组件报警告，加一个延迟解决
@@ -173,15 +183,23 @@ export function FormItem<Values>(props: PropsWithChildren<FormItemProps<Values>>
             });
           }
 
+          const disabeldMath = disabled
+            ? {
+                disabled:
+                  (isMatched(disabledCondition) && disabledResult) ||
+                  (!isMatched(disabledCondition) && !disabledResult),
+              }
+            : {};
+
           if (
             visible &&
             ((isMatched(visibleCondition) && visibleResult) || (!isMatched(visibleCondition) && !visibleResult))
           ) {
-            return renderColWrapper(itemElement);
+            return renderColWrapper(getItemElement(disabeldMath));
           }
 
           if (!visible) {
-            return renderColWrapper(itemElement);
+            return renderColWrapper(getItemElement(disabeldMath));
           }
 
           return null;
@@ -190,7 +208,7 @@ export function FormItem<Values>(props: PropsWithChildren<FormItemProps<Values>>
     );
   }
 
-  return renderColWrapper(itemElement);
+  return renderColWrapper(getItemElement());
 }
 
 FormItem.defaultProps = {
