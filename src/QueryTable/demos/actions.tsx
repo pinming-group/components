@@ -6,7 +6,7 @@ import {
   QueryTableColumnType,
   FormGroup,
   QueryTableColumnRenderContext,
-} from 'lucky-bird-ui';
+} from 'luckybird';
 import { Input, message, Button } from 'antd';
 import { remoteDataSource, columns, type RecordType } from '../../Table/demos/config';
 

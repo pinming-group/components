@@ -1,5 +1,5 @@
 import React from 'react';
-import { RangePicker } from 'lucky-bird-ui';
+import { RangePicker } from 'luckybird';
 import { Space } from 'antd';
 import moment from 'moment';
 

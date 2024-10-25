@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from 'lucky-bird-ui';
+import { Select } from 'luckybird';
 
 const Demo = () => {
   const onChange = (value) => {

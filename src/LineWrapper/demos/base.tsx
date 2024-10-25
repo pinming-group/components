@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineWrapper } from 'lucky-bird-ui';
+import { LineWrapper } from 'luckybird';
 
 const demo = () => {
   const list = [

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Input, InputNumber } from 'antd';
 
-import { EditableTable, type EditableTableInstance } from 'lucky-bird-ui';
+import { EditableTable, type EditableTableInstance } from 'luckybird';
 
 const columns = [
   {

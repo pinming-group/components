@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { message, Space } from 'antd';
-import { ButtonAction } from 'lucky-bird-ui';
+import { ButtonAction } from 'luckybird';
 
 const ButtonActionDemo = () => {
   return (

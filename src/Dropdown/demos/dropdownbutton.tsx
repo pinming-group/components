@@ -1,7 +1,7 @@
 import React from 'react';
-import { DropdownButton } from 'lucky-bird-ui';
+import { DropdownButton } from 'luckybird';
 import { Button, message, ConfigProvider } from 'antd';
-import type { DropdownButtonProps } from 'lucky-bird-ui';
+import type { DropdownButtonProps } from 'luckybird';
 import zhCN from 'antd/lib/locale/zh_CN';
 
 const actions: DropdownButtonProps['actions'] = [

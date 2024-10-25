@@ -1,5 +1,5 @@
 import React from 'react';
-import { TimePicker } from 'lucky-bird-ui';
+import { TimePicker } from 'luckybird';
 import { Space } from 'antd';
 import moment from 'moment';
 

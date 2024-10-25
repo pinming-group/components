@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Input, InputNumber } from 'antd';
-import { QueryTableInput } from 'lucky-bird-ui';
+import { QueryTableInput } from 'luckybird';
 
 const columns = [
   {

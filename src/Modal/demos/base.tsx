@@ -1,5 +1,5 @@
 import React, { Fragment, useRef } from 'react';
-import { ButtonAction, Modal, ModalInstance } from 'lucky-bird-ui';
+import { ButtonAction, Modal, ModalInstance } from 'luckybird';
 
 const demo = () => {
   const ref = useRef<ModalInstance>();

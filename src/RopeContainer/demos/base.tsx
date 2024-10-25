@@ -1,5 +1,5 @@
 import React from 'react';
-import { RopeContainer } from 'lucky-bird-ui';
+import { RopeContainer } from 'luckybird';
 import { Button } from 'antd';
 
 const Demo = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rule, ButtonAction } from 'lucky-bird-ui';
+import { Rule, ButtonAction } from 'luckybird';
 import { Form } from 'antd';
 import { Condition2, LineAction, GroupAction } from '../Bag';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ModalConfirm } from 'lucky-bird-ui';
+import { ModalConfirm } from 'luckybird';
 import { Button } from 'antd';
 
 const Demo = () => {

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Button, Input, InputNumber, message } from 'antd';
 import { remoteDataSource } from '../../../Table/demos/config';
-import { EditableQueryTable, type EditableQueryTableInstance } from 'lucky-bird-ui';
+import { EditableQueryTable, type EditableQueryTableInstance } from 'luckybird';
 
 import 'antd/lib/input-number/style/index.less';
 

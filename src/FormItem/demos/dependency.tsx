@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormItem, Select } from 'lucky-bird-ui';
+import { Form, FormItem, Select } from 'luckybird';
 import { Card, Row } from 'antd';
 
 const layout = { labelCol: { style: { width: 140 } }, span: 12 };
