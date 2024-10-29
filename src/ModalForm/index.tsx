@@ -63,8 +63,7 @@ export const IModalForm: ForwardRefRenderFunction<ModalFormInstance, ModalFormPr
 
   const getModalFormContext = () => ({ form, open: open!, visible: open!, values: form.getFieldsValue() });
 
-  const { modalProps, formProps, title, children, width, remoteValues } = propsRef.current || {};
-  const { footerRender, footer, ...restModalProps } = modalProps || {};
+  const { formProps, children, remoteValues } = propsRef.current || {};
 
   useImperativeHandle(
     ref,
@@ -74,7 +73,13 @@ export const IModalForm: ForwardRefRenderFunction<ModalFormInstance, ModalFormPr
         open: (params) => {
           setRef(propsRef, params);
 
-          const { initialValues, onOk, onCancel, ...restParams } = params;
+          const { initialValues, onOk, onCancel, modalProps = {}, ...restParams } = params;
+          const { footerRender, footer, ...restModalProps } = modalProps || {};
+
+          // ===== footer支持ctx =====
+          const renderFooter = () => {
+            return footerRender ? footerRender(getModalFormContext()) : footer;
+          };
 
           if (initialValues) {
             form.setFieldsValue(initialValues);
@@ -82,6 +87,10 @@ export const IModalForm: ForwardRefRenderFunction<ModalFormInstance, ModalFormPr
 
           return modalRef.current?.open({
             ...restParams,
+            modalProps: {
+              ...restModalProps,
+              footer: renderFooter(),
+            },
             onCancel: (e) => {
               form.resetFields();
               return onCancel?.(e, getModalFormContext());
@@ -99,17 +108,10 @@ export const IModalForm: ForwardRefRenderFunction<ModalFormInstance, ModalFormPr
     [form]
   );
 
-  // ===== footer支持ctx =====
-  const renderFooter = () => {
-    return footerRender ? footerRender(getModalFormContext()) : footer;
-  };
-
   return (
     <Form component="div" {...formProps} remoteValues={remoteValues} form={form}>
       {/* @ts-expect-error */}
-      <Modal width={width} title={title} footer={renderFooter()} ref={modalRef} {...restModalProps}>
-        {children && React.cloneElement(children, { ...getModalFormContext() })}
-      </Modal>
+      <Modal ref={modalRef}>{children && React.cloneElement(children, { ...getModalFormContext() })}</Modal>
     </Form>
   );
 };
